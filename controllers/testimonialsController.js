@@ -1,18 +1,27 @@
 const { validationResult } = require('express-validator');
+const { createTestimonial } = require('../services/testimonialsServices');
 
 const postTestimonial = async (req, res) => {
     const errors = validationResult(req);
-
-    const { name, content, image} = req.body;
 
     if(!errors.isEmpty()) {
         return res.status(400).json({
             errors: errors
         })
-    } else {
-        return res.status(200).json({
-            name: name,
-            content: content
+    } 
+
+    const { name, content, image} = req.body;
+
+    try {
+        const newTestimonial = await createTestimonial({name, content, image});
+        res.status(200).json({
+            msg: "New testimonial create succesfully",
+            testimonial: newTestimonial
+        })
+    } catch (error) {
+        res.status(500).json({
+            msg: "Something has gone wrong",
+            errors: error.message
         })
     }
 }
