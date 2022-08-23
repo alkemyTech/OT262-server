@@ -61,8 +61,8 @@ module.exports = {
 				});
 			}
 			const updateCategory = {
-				name: name ? String(name) : categoryInDB.name,
-				description: description ? String(description) : categoryInDB.description,
+				name: name || categoryInDB.name,
+				description: description || categoryInDB.description,
 			};
 			await Category.update(updateCategory, {
 				where: {
@@ -71,6 +71,7 @@ module.exports = {
 			});
 			return res.status(200).json({
 				status: "successful",
+				data: updateCategory
 			});
 		} catch (error) {
 			return res.status(400).json({
