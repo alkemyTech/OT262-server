@@ -79,4 +79,38 @@ module.exports = {
 			});
 		}
 	},
+	destroy: async (req, res) => {
+        
+        const { id } = req.params;
+        
+		try {
+		const categoryInDB = await Category.findByPk(id);
+
+			if (!categoryInDB) {
+				return res.status(400).json({
+					status: "error",
+					message: "Category is not found in DB",
+				});
+			}
+
+			const deleteCategory = {
+				deletedAt: new Date(),
+			}
+
+			await Category.update(deleteCategory, {
+				where: {
+					id,
+				},
+			});
+			
+			return res.status(200).json({
+				status: "successful",
+			});
+		} catch (error) {
+			return res.status(400).json({
+				status: "error",
+				message: error,
+			});
+		}
+	},
 };
