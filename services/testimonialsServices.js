@@ -5,4 +5,14 @@ const createTestimonial = async (data) => {
     return newTestimonial;
 }
 
-module.exports = {createTestimonial};
+const findTestimonial = async (id) => {
+    const foundUpdate = await Testimonial.findOne({ where: { id:id }});
+    return foundUpdate;
+}
+
+const updateTestimonial = async (toUpdateTestimonial ,newData) => {
+    const updatedTestimonial = await toUpdateTestimonial.update(newData);
+    return updatedTestimonial;
+}
+ 
+module.exports = {createTestimonial, findTestimonial, updateTestimonial};
