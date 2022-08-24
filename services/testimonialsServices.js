@@ -14,5 +14,9 @@ const updateTestimonial = async (toUpdateTestimonial ,newData) => {
     const updatedTestimonial = await toUpdateTestimonial.update(newData);
     return updatedTestimonial;
 }
+
+const destroyTestimonial = async (id) => {
+    await Testimonial.destroy({ where : { id } });
+}
  
-module.exports = {createTestimonial, findTestimonial, updateTestimonial};
+module.exports = {createTestimonial, findTestimonial, updateTestimonial, destroyTestimonial};
