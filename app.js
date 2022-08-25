@@ -10,6 +10,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const categoriesRouter = require('./routes/categories');
 const testimonialsRouter = require('./routes/testimonials');
+const membersRouter = require('./routes/members');
 const activitiesRouter = require('./routes/activities');
 
 const app = express();
@@ -29,6 +30,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/categories', categoriesRouter);
 app.use('/testimonials', testimonialsRouter);
+app.use('/members', membersRouter)
 app.use('/activities', activitiesRouter);
 
 
