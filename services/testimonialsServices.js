@@ -17,6 +17,8 @@ const updateTestimonial = async (toUpdateTestimonial ,newData) => {
 
 const destroyTestimonial = async (id) => {
     await Testimonial.destroy({ where : { id } });
+    const deletedTestimonial = await Testimonial.findOne({ where: { id:id }, paranoid: false });
+    return deletedTestimonial;
 }
 
 const findAllTestimonial = async () => {
