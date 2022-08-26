@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Member.init({
     name: DataTypes.STRING,
-    image: DataTypes.STRING
+    image: DataTypes.STRING,
+    deletedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Member',
