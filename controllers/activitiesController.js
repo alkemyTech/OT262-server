@@ -55,4 +55,16 @@ const updateActivity = async (req, res) => {
     }
 }
 
-module.exports = {postActivity, updateActivity};
+const getSingleActivity = async (req, res) => {
+    const id = req.params.id
+    try {
+        const activity = await Activity.findOne({ where: {id}});
+        res.status(200).json({ activity })
+    } catch (error) {
+        res.status(500).json({
+            error: error.message
+        });
+    }
+};
+
+module.exports = {postActivity, updateActivity, getSingleActivity};
