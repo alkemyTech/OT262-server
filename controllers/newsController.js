@@ -1,14 +1,23 @@
+const { validationResult } = require('express-validator');
 const { entries } = require('../models')
 
-const getAllNews = async (req, res) => {
+const createNews = async (req, res) => {
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()) {
+        return res.status(400).json({
+            errors: errors
+        })
+    } 
+
+    const { name, content, image, type } = req.body;
 
     try {
-        const news = await entries.findAll({
-            attributes: ['name', 'image', 'createdAt']
-        })
+        const newNews = { name, content, image, type }
+        await entries.create(newNews);
         res.status(200).json({
-            msg: "All the news",
-            allNews: news
+            msg: "New news created succesfully",
+            payload: newNews
         })
     } catch (error) {
         res.status(500).json({
@@ -18,4 +27,4 @@ const getAllNews = async (req, res) => {
     }
 }
 
-module.exports = { getAllNews };
+module.exports = { createNews };
