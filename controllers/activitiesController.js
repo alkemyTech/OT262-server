@@ -55,4 +55,21 @@ const updateActivity = async (req, res) => {
     }
 }
 
-module.exports = {postActivity, updateActivity};
+const deleteActivity = async (req, res) => {
+    const { id } = req.params;
+    const activity = await Activity.findOne({ where: {id}});
+
+    if (!activity){
+        return res.status(404).json({
+            error: `Activity with id ${id} not found`
+        })
+    }
+
+    activity.deletedAt = Date.now()
+    res.status(200).json({
+        activity
+    })
+}
+
+
+module.exports = {postActivity, updateActivity, deleteActivity};
