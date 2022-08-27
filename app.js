@@ -10,8 +10,10 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const categoriesRouter = require("./routes/categories");
 const testimonialsRouter = require("./routes/testimonials");
-
 const contactsRouter = require("./routes/contacts");
+const membersRouter = require("./routes/members");
+const activitiesRouter = require("./routes/activities");
+const newsRouter = require("./routes/news");
 
 const app = express();
 app.use(cors());
@@ -30,6 +32,9 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/categories", categoriesRouter);
 app.use("/testimonials", testimonialsRouter);
+app.use("/members", membersRouter);
+app.use("/activities", activitiesRouter);
+app.use("/news", newsRouter);
 
 app.use("/contacts", contactsRouter);
 
