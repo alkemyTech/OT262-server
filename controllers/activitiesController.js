@@ -55,6 +55,20 @@ const updateActivity = async (req, res) => {
     }
 }
 
+const getSingleActivity = async (req, res) => {
+    const { id } = req.params
+    const activity = await Activity.findOne({ where: { id }});
+    
+    if (!activity){
+        return res.status(404).json({
+            error: `Activity with id ${id} not found`
+        })
+    }
+    
+    res.status(200).json({ activity })
+    
+};
+
 const getActivities = async (req, res) => {
 try {
     const activities = await Activity.findAll();
@@ -67,4 +81,20 @@ try {
 
 }
 
-module.exports = {postActivity, updateActivity, getActivities};
+const deleteActivity = async (req, res) => {
+    const { id } = req.params;
+    const activity = await Activity.findOne({ where: {id}});
+
+    if (!activity){
+        return res.status(404).json({
+            error: `Activity with id ${id} not found`
+        })
+    }
+
+    activity.deletedAt = Date.now()
+    res.status(200).json({
+        activity
+    })
+}
+
+module.exports = {postActivity, updateActivity, getActivities, getSingleActivity, deleteActivity};
