@@ -1,6 +1,15 @@
 const { Member } = require('../models')
 const { validationResult } = require('express-validator')
 
+const getMembers = async (req, res) => {
+  try {
+    const members = await Member.findAll()
+    res.status(200).json({ data: members })
+  } catch (error) {
+    res.status(500).send(error)
+  }
+}
+
 const createMember = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -34,6 +43,7 @@ const deleteMember = async (req, res) => {
 }
 
 module.exports = {
+  getMembers,
   createMember,
   deleteMember
 }
