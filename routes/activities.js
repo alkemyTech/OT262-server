@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { postActivity, updateActivity, getActivities, getSingleActivity } = require("../controllers/activitiesController");
+const { postActivity, updateActivity, getActivities, getSingleActivity, deleteActivity } = require("../controllers/activitiesController");
 const { activityFieldCheck } = require("../middlewares/activityValidation");
 
 // create activity
@@ -12,4 +12,8 @@ router.get('/', getActivities);
 
 //get single activity
 router.get('/:id', getSingleActivity);
+
+//soft delete activity
+router.delete('/:id', deleteActivity);
+
 module.exports = router;
