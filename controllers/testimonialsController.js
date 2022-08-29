@@ -67,9 +67,10 @@ const deleteTestimonial = async (req, res) => {
     }
 
     try {
-        await destroyTestimonial(id);
+        const deletedTestimonial = await destroyTestimonial(id);
         res.status(200).json({
-            msg: "Testimonial deleted succesfully"
+            msg: "Testimonial deleted succesfully",
+            deletedTestimonial
         })
     } catch (error) {
         res.status(500).json({
