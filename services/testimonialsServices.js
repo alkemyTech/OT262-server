@@ -20,5 +20,10 @@ const destroyTestimonial = async (id) => {
     const deletedTestimonial = await Testimonial.findOne({ where: { id:id }, paranoid: false });
     return deletedTestimonial;
 }
+
+const findAllTestimonial = async () => {
+    const allTestimonials = await Testimonial.findAll();
+    return allTestimonials;
+}
  
-module.exports = {createTestimonial, findTestimonial, updateTestimonial, destroyTestimonial};
+module.exports = {createTestimonial, findTestimonial, updateTestimonial, destroyTestimonial,findAllTestimonial};
