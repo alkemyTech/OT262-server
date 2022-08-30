@@ -10,8 +10,8 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const categoriesRouter = require("./routes/categories");
 const testimonialsRouter = require("./routes/testimonials");
-const membersRouter = require("./routes/members");
 const contactsRouter = require("./routes/contacts");
+const membersRouter = require("./routes/members");
 const activitiesRouter = require("./routes/activities");
 const newsRouter = require("./routes/news");
 
