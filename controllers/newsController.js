@@ -1,6 +1,36 @@
 const { entries } = require('../models')
 const { validationResult } = require('express-validator')
 
+
+const deleteNewsById = async (req, res) => {
+    
+    const { id } = req.params;
+
+    const news = await entries.findOne({ where: {id}});
+
+    if(news === null) {
+        return res.status(404).json({
+            error: `News with id ${id} not found` 
+        })
+    }
+
+    // await Testimonial.destroy({ where : { id } });
+    // const deletedTestimonial = await Testimonial.findOne({ where: { id:id }, paranoid: false });
+
+    try {
+        const deletedNews = await entries.destroy({ where : { id } });
+        res.status(200).json({
+            msg: "News deleted succesfully",
+            news
+        })
+    } catch (error) {
+        res.status(500).json({
+            msg: "Something has gone wrong",
+            errors: error.message
+        })
+    }
+}
+
 const createNews = async (req, res) => {
     const errors = validationResult(req);
 
@@ -45,4 +75,4 @@ const getAllNews = async (req, res) => {
     }
 }
 
-module.exports = { getAllNews, createNews };
+module.exports = { getAllNews, createNews, deleteNewsById };
