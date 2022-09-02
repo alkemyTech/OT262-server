@@ -2,15 +2,15 @@ const { Organization, Member, Testimonial } = require("../models");
 
 const getOrganization = async (req, res) => {
 	try {
-		const organizations = await Organization.findAll();
-		const members = await Member.findAll();
-		const testimonial = await Testimonial.findAll();
+		const organization = await Organization.findOne();
+		const members = await Member.findAll({limit: 5});
+		const testimonials = await Testimonial.findAll({limit: 5});
 		return res.status(200).json({
 			status: "successful",
 			data: {
-				...organizations,
-				...members,
-				...testimonial
+				organization,
+				members,
+				testimonials,
 			},
 		});
 	} catch (error) {
