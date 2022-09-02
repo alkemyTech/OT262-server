@@ -7,7 +7,7 @@ const registerUser = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors });
   }
-  const { firstName, lastName, email, password, image, roleId } = await req.body;
+  const { firstName, lastName, email, password, image} = await req.body;
   try {
     if (!(email && password && firstName && lastName)) {
       res.status(400).send("All input is required");
@@ -28,7 +28,7 @@ const registerUser = async (req, res) => {
       email,
       password: encryptedPassword,
       image,
-      roleId
+      roleId:1
     });
 
     res
