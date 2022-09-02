@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
 const { User } = require('../models')
 const bcrypt = require('bcryptjs');
-const { decode } = require('jsonwebtoken');
+const { verify } = require('jsonwebtoken');
 
 const login = async (req, res) => {
     const errors = validationResult(req);
@@ -36,7 +36,24 @@ const login = async (req, res) => {
 }
 
 const profile = async (req, res) => {
+   const token = req.headers.authorization
    
+    try {
+        
+        const user = verify(token, process.env.SECRET_KEY);
+        delete user.password;
+
+        return res.status(200).json({
+			status: "successful",
+			data: user,
+		});
+        
+    } catch(err) {
+        return res.status(400).json({
+			status: "error",
+			message: error,
+		});
+    }
 }
 
 module.exports = { login, profile };
