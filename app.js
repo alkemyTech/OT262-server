@@ -36,7 +36,7 @@ app.use("/testimonials", testimonialsRouter);
 app.use("/members", membersRouter);
 app.use("/activities", activitiesRouter);
 app.use("/news", newsRouter);
-app.use("/auth", organizationRouter);
+app.use("/auth", authRouter);
 app.use("/contacts", contactsRouter);
 app.use("/organization", organizationRouter);
 
