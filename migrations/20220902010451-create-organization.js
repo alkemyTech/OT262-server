@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       image: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       phone: {
         type: Sequelize.STRING
@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       welcomeText: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
