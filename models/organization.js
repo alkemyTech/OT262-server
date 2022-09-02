@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
      static associate(models) {
-      Organization.belongsTo(models.Network, { as: "networks"});
+      Organization.belongsTo(models.Networks, { as: "networks" });
     }
   };
   Organization.init({
@@ -18,8 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.STRING,
     phone: DataTypes.STRING,
     address: DataTypes.STRING,
-    welcomeText: DataTypes.STRING,
-    networksId: DataTypes.INTEGER
+    welcomeText: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Organization',

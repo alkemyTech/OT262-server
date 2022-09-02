@@ -2,7 +2,7 @@ const { Organization } = require("../models");
 
 const getOrganizations = async (req, res) => {
 	try {
-		const organizations = await Organization.findAll({include: "networks"});
+		const organizations = await Organization.findAll();
 		return res.status(200).json({
 			status: "successful",
 			data: organizations,
