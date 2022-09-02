@@ -30,7 +30,16 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      facebook: {
+        type: Sequelize.STRING
+      },
+      linkedin: {
+        type: Sequelize.STRING
+      },
+      instagram: {
+        type: Sequelize.STRING
+      },
     });
   },
   async down(queryInterface, Sequelize) {

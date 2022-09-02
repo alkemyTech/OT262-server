@@ -10,11 +10,14 @@ module.exports = {
       welcomeText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Adipiscing dignissim ac et eleifend lacus, rhoncus, dignissim sagittis. Tellus ac a, elementum ut. Tellus a morbi tincidunt ultricies malesuada eget turpis. Lacus enim non enim, velit hac turpis interdum arcu. Suspendisse at vel ultrices amet orci enim lectus porttitor ut.",
       createdAt: new Date(),
       updatedAt: new Date(),
+      facebook: "www.facebook.com",
+      linkedin: "www.linkedin.com",
+      instagram: "www.instagram.com",
     }], {});
   },
 
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
