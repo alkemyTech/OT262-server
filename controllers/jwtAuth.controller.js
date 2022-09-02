@@ -1,4 +1,4 @@
-var jwt = require("jsonwebtoken");
+let jwt = require("jsonwebtoken");
 
 
 //This should be imported into userRegister. Right below user.create function.

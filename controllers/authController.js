@@ -30,6 +30,7 @@ const login = async (req, res) => {
             user: user,
             token
         });
+        
 
     } catch (error) {
         res.status(500).json(error);
