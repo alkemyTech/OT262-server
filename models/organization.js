@@ -12,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
+  }
   Organization.init({
     name: DataTypes.STRING,
-    image: DataTypes.STRING,
+    image: DataTypes.TEXT,
     phone: DataTypes.STRING,
     address: DataTypes.STRING,
-    welcomeText: DataTypes.STRING
+    welcomeText: DataTypes.TEXT
   }, {
     sequelize,
     modelName: 'Organization',
