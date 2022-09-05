@@ -2,7 +2,7 @@ const { validationResult } = require('express-validator');
 const { User } = require('../models')
 const {createToken } = require('../controllers/jwtAuth.controller')
 const bcrypt = require('bcryptjs');
-const { verify } = require('jsonwebtoken');
+const { decode } = require('jsonwebtoken');
 
 const login = async (req, res) => {
     const errors = validationResult(req);
@@ -40,11 +40,11 @@ const login = async (req, res) => {
 }
 
 const profile = async (req, res) => {
-   const token = req.headers.authorization
+   const token = req.token;
    
     try {
         
-        const user = verify(token, process.env.SECRET_KEY);
+        const user = decode(token, process.env.SECRET_KEY);
         delete user.password;
 
         return res.status(200).json({
