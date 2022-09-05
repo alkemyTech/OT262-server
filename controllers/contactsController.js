@@ -1,10 +1,12 @@
 const { validationResult } = require("express-validator");
-const { createContact } = require("../services/contactsServices");
+const { getContacts, createContact } = require("../services/contactsServices");
 
 const postContacts = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+
     return res.status(400).json({ errors:errors });
+
   }
 
   const {name,phone,email,message} = req.body
@@ -21,4 +23,6 @@ const postContacts = async (req, res) => {
     }
 }
 
-module.exports = {postContacts}
+
+
+module.exports = {getContacts, postContacts}
