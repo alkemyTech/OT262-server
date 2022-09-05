@@ -5,4 +5,5 @@ const contactField = [
     check("email").notEmpty().withMessage("Email is required")
 ]
 
+
 module.exports = {contactField}
