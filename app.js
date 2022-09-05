@@ -16,6 +16,8 @@ const activitiesRouter = require("./routes/activities");
 const newsRouter = require("./routes/news");
 const authRouter = require("./routes/auth");
 const organizationRouter = require("./routes/organization");
+const slidesRouter = require('./routes/slides');
+
 const app = express();
 app.use(cors());
 
@@ -37,6 +39,7 @@ app.use("/members", membersRouter);
 app.use("/activities", activitiesRouter);
 app.use("/news", newsRouter);
 app.use("/auth", authRouter);
+app.use('/slides', slidesRouter);
 app.use("/contacts", contactsRouter);
 app.use("/organization", organizationRouter);
 
