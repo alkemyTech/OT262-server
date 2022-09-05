@@ -1,5 +1,6 @@
 const { validationResult } = require('express-validator');
 const { User } = require('../models')
+const {createToken } = require('../controllers/jwtAuth.controller')
 const bcrypt = require('bcryptjs');
 
 const login = async (req, res) => {
@@ -24,13 +25,16 @@ const login = async (req, res) => {
         if (!correctPassword){
             return res.status(401).json({ message: "Invalid credentials"});
         }
-
+        const token = createToken(user)
         res.status(200).json({
-            user: user
+            user: user,
+            token
         });
+        
 
     } catch (error) {
         res.status(500).json(error);
+        console.log(error);
     }
 }
 
