@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.TEXT,
     phone: DataTypes.STRING,
     address: DataTypes.STRING,
-    welcomeText: DataTypes.TEXT
+    welcomeText: DataTypes.TEXT,
+    facebook: DataTypes.STRING,
+    linkedin: DataTypes.STRING,
+    instagram: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Organization',
