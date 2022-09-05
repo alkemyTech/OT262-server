@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const {contactField, validateToken, checkAdmin} = require("../middlewares")
-
+const {contactValidation} = require("../middlewares/contactValidation")
+const {validateToken} = require("../middlewares/validateToken")
+const {checkAdmin} = require("../middlewares/checkAdmin")
 const {postContacts, getAllContacts} = require("../controllers/contactsController")
 
 
 //Create new contact
-router.post("/", contactField ,postContacts)
+router.post("/", contactValidation ,postContacts)
 
 //Get all contacts
 router.get("/", validateToken, checkAdmin, getAllContacts)
