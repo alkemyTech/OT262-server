@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 
 const checkAdmin = async (req, res, next) => {
-    const { token } = req.token
+    const token = req.token
     const decodedToken = jwt.verify(token, process.env.JWT_KEY);
-    if (!decodedToken.user.roleId == 2){
+    if (decodedToken.user.roleId == 1){
         return res.status(401).json({message: "Unauthorized"})
     } else {
         res.status(200)
