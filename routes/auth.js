@@ -7,9 +7,7 @@ const { loginCheck } = require('../middlewares/loginValidation')
 const { validateToken } = require('../middlewares/validateToken')
 
 router.post('/register', registerValidation, registerUser);
-
 router.post('/login', loginCheck ,login);
-
 router.get('/me', validateToken, profile);
 
 module.exports = router
