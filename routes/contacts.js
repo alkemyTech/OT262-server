@@ -5,11 +5,7 @@ const {validateToken} = require("../middlewares/validateToken")
 const {checkAdmin} = require("../middlewares/checkAdmin")
 const {postContacts, getAllContacts} = require("../controllers/contactsController")
 
-
-//Create new contact
-router.post("/", contactValidation ,postContacts)
-
-//Get all contacts
 router.get("/", validateToken, checkAdmin, getAllContacts)
+router.post("/", contactValidation ,postContacts)
 
 module.exports = router;
