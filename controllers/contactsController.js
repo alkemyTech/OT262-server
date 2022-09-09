@@ -4,21 +4,37 @@ const { createContact } = require("../services/contactsServices");
 const postContacts = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors:errors });
+    return res.status(400).json({ errors: errors });
   }
 
-  const {name,phone,email,message} = req.body
+  const { name, phone, email, message } = req.body;
 
-  try{
-    const newContact = await createContact({name,phone,email,message})
-    res.status(200).json({ 
-        message:"Contact created",
-        payload:newContact
-    })
-}
-    catch(err){
-        res.status(500).json({ message: "There's been an error"})
-    }
-}
+  try {
+    const newContact = await createContact({ name, phone, email, message });
+    res.status(200).json({
+      message: "Contact created",
+      payload: newContact,
+    });
+  } catch (err) {
+    res.status(500).json({ message: "There's been an error" });
+  }
+};
 
-module.exports = {postContacts}
+//Get all contacts
+const getAllContacts = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors });
+  }
+  try {
+    const getContacts = await Contacts.findAll();
+    res.status(200).json({
+      message: "Contacts listed successfully",
+      payload: getContacts,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "There's been an error" });
+  }
+};
+
+module.exports = { getAllContacts, postContacts };

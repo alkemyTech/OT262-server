@@ -7,7 +7,7 @@ const registerUser = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors });
   }
-  const { firstName, lastName, email, password, image, roleId } = await req.body;
+  const { firstName, lastName, email, password, image } = await req.body;
   try {
     if (!(email && password && firstName && lastName)) {
       res.status(400).send("All input is required");
@@ -17,26 +17,25 @@ const registerUser = async (req, res) => {
 
     if (oldUser) {
       res.status(400).send("User already exists");
+    } else {
+      const encryptedPassword = bcrypt.hashSync(password, 10);
+
+      const newUser = await User.create({
+        firstName,
+        lastName,
+        email,
+        password: encryptedPassword,
+        image,
+        roleId: 1,
+      });
+
+      res
+        .status(200)
+        .json({ msg: "User created successfully", payload: newUser });
     }
-
-    
-    const encryptedPassword = bcrypt.hashSync(password, 10);
-
-    const newUser = await User.create({
-      firstName,
-      lastName,
-      email,
-      password: encryptedPassword,
-      image,
-      roleId
-    });
-
-    res
-      .status(200)
-      .json({ msg: "User created successfully", payload: newUser });
   } catch (err) {
     res.status(400).json({ msg: "Error creating user", err });
-    console.log(err)
+    console.log(err);
   }
 };
 

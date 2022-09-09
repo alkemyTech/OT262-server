@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
+const { getAllUsers } = require('../controllers/userController')
+const { deleteUser } = require('../controllers/userController')
+const { validateToken } = require('../middlewares/validateToken');
+const { checkAdmin } = require('../middlewares/checkAdmin');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-
+router.get('/', validateToken, checkAdmin, getAllUsers);
+router.delete('/:id', validateToken, checkAdmin, deleteUser);
 
 
 
