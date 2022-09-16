@@ -10,6 +10,6 @@ const {postContacts, getAllContacts} = require("../controllers/contactsControlle
 router.post("/", contactValidation ,postContacts)
 
 //Get all contacts
-router.get("/", validateToken, checkAdmin, getAllContacts)
+router.get("/", /* validateToken, checkAdmin,  */getAllContacts)
 
 module.exports = router;
