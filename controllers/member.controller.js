@@ -1,5 +1,6 @@
 const { Member } = require('../models')
 const { validationResult } = require('express-validator')
+const { createMember, findMember, updateMember, destroyMember, findAllMember} = require('../services/membersServices');
 
 const getMembers = async (req, res) => {
   try {
@@ -10,7 +11,7 @@ const getMembers = async (req, res) => {
   }
 }
 
-const createMember = async (req, res) => {
+const postMember = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json(errors)
@@ -25,24 +26,31 @@ const createMember = async (req, res) => {
 }
 
 const deleteMember = async (req, res) => {
-  const { id } = req.params
-  const memberFound = await Member.findByPk(id)
-  if (!memberFound) {
-    return res.status(404).json({ message: 'Member not found' })
-  }
-  try {
-    const deletedMember = {
-      deletedAt: new Date()
+  const { id } = req.params;
+
+    const foundMember = await findMember(id);
+
+    if(foundMember === null) {
+        return res.status(404).json({
+            error: `Member with id ${id} not found` 
+        })
     }
-    await Member.update(deletedMember, { where: { id } })
-    const member = await Member.findByPk(id)
-    return res.status(200).json({ message: 'Member deleted successfully', member })
-  } catch (error) {
-    return res.send(error)
-  }
+
+    try {
+        const deletedMember = await destroyMember(id);
+        res.status(200).json({
+            msg: "Member deleted succesfully",
+            deletedMember
+        })
+    } catch (error) {
+        res.status(500).json({
+            msg: "Something has gone wrong",
+            errors: error.message
+        })
+    }
 }
 
-const updateMember = async (req, res) => {
+const putMember = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json(errors)
@@ -67,9 +75,9 @@ const updateMember = async (req, res) => {
 
 module.exports = {
   getMembers,
-  createMember,
+  postMember,
   deleteMember,
-  updateMember
+  putMember
 }
 
 

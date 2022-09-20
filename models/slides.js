@@ -14,14 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Slides.init({
-    imageUrl: DataTypes.STRING,
+    image: DataTypes.STRING,
     text: DataTypes.STRING,
     order: DataTypes.INTEGER,
     organizationId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Slides',
-    timestamps: false,
+    timestamps: true,
     paranoid: true
   });
   return Slides;

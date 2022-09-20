@@ -16,12 +16,14 @@ module.exports = (sequelize, DataTypes) => {
   entries.init({
     name: DataTypes.STRING,
     image: DataTypes.STRING,
+    content: DataTypes.STRING,
     categoryId: DataTypes.STRING,
-    type: DataTypes.STRING,
-    deletedAt: DataTypes.DATE
+    type: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'entries',
+    timestamps: true,
+    paranoid: true
   });
   return entries;
 };

@@ -16,10 +16,12 @@ module.exports = (sequelize, DataTypes) => {
   Member.init({
     name: DataTypes.STRING,
     image: DataTypes.STRING,
-    deletedAt: DataTypes.DATE
+    rol: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Member',
+    timestamps: true,
+    paranoid: true
   });
   return Member;
 };

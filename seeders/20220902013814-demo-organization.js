@@ -8,11 +8,11 @@ module.exports = {
       phone: '+54 11-2233-4455',
       address: "Calle falsa 123",
       welcomeText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Adipiscing dignissim ac et eleifend lacus, rhoncus, dignissim sagittis. Tellus ac a, elementum ut. Tellus a morbi tincidunt ultricies malesuada eget turpis. Lacus enim non enim, velit hac turpis interdum arcu. Suspendisse at vel ultrices amet orci enim lectus porttitor ut.",
-      createdAt: new Date(),
-      updatedAt: new Date(),
       facebook: "www.facebook.com",
       linkedin: "www.linkedin.com",
       instagram: "www.instagram.com",
+      createdAt: new Date,
+      updatedAt: new Date
     }], {});
   },
 

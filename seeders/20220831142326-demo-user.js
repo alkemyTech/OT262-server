@@ -1,46 +1,25 @@
 'use strict';
 
+const bcrypt = require("bcryptjs");
+const encryptedPassword = bcrypt.hashSync('123456', 10);
+
 module.exports = {
   async up (queryInterface, Sequelize) {
       await queryInterface.bulkInsert('Users', [{
-        firstName: 'Usuario1',
+        firstName: 'Usuario Normal',
         lastName: 'Demo Standard',
-        email: 'test1@test.com',
-        // Important: Password not encrypted yet! 
-        password: '1234',
+        email: 'user@test.com',
+        password: encryptedPassword,
         roleId: 1,
         image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
         createdAt: new Date,
         updatedAt: new Date
       },
       {
-        firstName: 'Usuario2',
-        lastName: 'Demo Standard',
-        email: 'test2@test.com',
-        // Important: Password not encrypted yet! 
-        password: '1234',
-        roleId: 1,
-        image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-        createdAt: new Date,
-        updatedAt: new Date
-      },
-      {
-        firstName: 'Usuario3',
-        lastName: 'Demo Standard',
-        email: 'test3@test.com',
-        // Important: Password not encrypted yet! 
-        password: '1234',
-        roleId: 1,
-        image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-        createdAt: new Date,
-        updatedAt: new Date
-      },
-      {
-        firstName: 'Usuario Admin',
+        firstName: 'Usuario ADministrador',
         lastName: 'Demo Admin',
-        email: 'test4@test.com',
-        // Important: Password not encrypted yet! 
-        password: '1234',
+        email: 'admin@test.com',
+        password: encryptedPassword,
         roleId: 2,
         image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
         createdAt: new Date,
