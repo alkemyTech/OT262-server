@@ -1,11 +1,11 @@
-const { entries } = require('../models')
-const { validationResult } = require('express-validator')
+const { validationResult } = require('express-validator');
+const { createNews, findNews, updateNews, destroyNews, findAllNews} = require('../services/newsServices');
 
 
 const getNewsById = async (req, res) => {
 
     const { id } = req.params;
-    const newsDetails = await entries.findOne({ where: {id}})
+    const newsDetails = await findNews(id)
 
     if(newsDetails === null) {
         return res.status(404).json({
@@ -28,34 +28,31 @@ const getNewsById = async (req, res) => {
 
 const deleteNewsById = async (req, res) => {
     
-    const { id } = req.params
-    
+    const { id } = req.params;
+
+    const foundNews = await findNews(id);
+
+    if(foundNews === null) {
+        return res.status(404).json({
+            error: `News with id ${id} not found` 
+        })
+    }
+
     try {
-        const news = await entries.findOne({ where: {id}});
-
-        if(!news) {
-            return res.status(404).json({
-                status: "error",
-                message: `News with id ${id} not found` 
-            })
-        }
-
-        news.deletedAt: new Date()
-
+        const deletedNews = await destroyNews(id);
         res.status(200).json({
             msg: "News deleted succesfully",
-            news
+            deletedNews
         })
-
     } catch (error) {
         res.status(500).json({
-            msg: "Something went wrong",
+            msg: "Something has gone wrong",
             errors: error.message
         })
     }
 }
 
-const createNews = async (req, res) => {
+const postNews = async (req, res) => {
     const errors = validationResult(req);
 
     if(!errors.isEmpty()) {
@@ -64,14 +61,13 @@ const createNews = async (req, res) => {
         })
     } 
 
-    const { name, content, image, type } = req.body;
+    const { name, content, image, type, categoryId } = req.body;
 
     try {
-        const newNews = { name, content, image, type }
-        await entries.create(newNews);
+        const createdNew = await createNews({ name, content, image, type, categoryId })
         res.status(200).json({
             msg: "New news created succesfully",
-            payload: newNews
+            data: createdNew
         })
     } catch (error) {
         res.status(500).json({
@@ -84,9 +80,7 @@ const createNews = async (req, res) => {
 const getAllNews = async (req, res) => {
 
     try {
-        const news = await entries.findAll({
-            attributes: ['name', 'image', 'createdAt', "id"]
-        })
+        const news = await findAllNews()
         res.status(200).json({
             msg: "All the news",
             allNews: news
@@ -99,4 +93,32 @@ const getAllNews = async (req, res) => {
     }
 }
 
-module.exports = { getAllNews, createNews, deleteNewsById, getNewsById };
+const putNews = async (req, res) => {
+
+    const { id } = req.params;
+
+    const foundNews = await findNews(id);
+
+    if(foundNews === null) {
+        return res.status(404).json({
+            error: `News with id ${id} not found` 
+        })
+    }
+
+    const { name, content, image} = req.body;
+
+    try {
+        const toUpdateNews = await updateNews(foundNews, {name, content, image});
+        res.status(200).json({
+            msg: "News updated succesfully",
+            News: toUpdateNews
+        })
+    } catch (error) {
+        res.status(500).json({
+            msg: "Something has gone wrong",
+            errors: error.message
+        })
+    }
+}
+
+module.exports = { getAllNews, postNews, deleteNewsById, getNewsById, putNews };

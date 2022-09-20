@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const { createMember, deleteMember, getMembers, updateMember } = require('../controllers/member.controller')
+const { postMember, deleteMember, getMembers, putMember } = require('../controllers/member.controller')
 const { memberFields } = require('../middlewares/memberValidation')
 const { validateToken } = require('../middlewares/validateToken');
 const { checkAdmin } = require('../middlewares/checkAdmin');
 
 router.get('/', getMembers)
-router.post('/', [memberFields], createMember)
-router.put('/:id', updateMember)
+router.post('/', [memberFields], postMember)
+router.put('/:id', putMember)
 router.delete('/:id', validateToken, checkAdmin, deleteMember)
 
 module.exports = router

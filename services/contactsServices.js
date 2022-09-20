@@ -6,7 +6,12 @@ const createContact = async (data) => {
     return newContact;
 }
 
+const getAllContacts = async () => {
+    const allContacts = await Contacts.findAll();
+    return allContacts;
+}
 
 
 
-module.exports = {createContact}
+
+module.exports = {createContact, getAllContacts}

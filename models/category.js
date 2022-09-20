@@ -16,10 +16,11 @@ module.exports = (sequelize, DataTypes) => {
   Category.init({
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    deletedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Category',
+    timestamps: true,
+    paranoid: true
   });
   return Category;
 };

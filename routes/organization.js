@@ -5,6 +5,6 @@ const { validateToken } = require('../middlewares/validateToken');
 const { checkAdmin } = require('../middlewares/checkAdmin');
 
 router.get('/', getOrganization);
-router.put('/', validateToken, checkAdmin, updateOrganization);
+router.put('/:id', validateToken, checkAdmin, updateOrganization);
 
 module.exports = router;

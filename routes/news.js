@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { getAllNews, createNews, deleteNewsById, getNewsById } = require("../controllers/newsController");
+const { getAllNews, postNews, deleteNewsById, getNewsById, putNews } = require("../controllers/newsController");
 const { newsFieldCheck } = require("../middlewares/newsValidation");
+const { validateToken } = require('../middlewares/validateToken');
+const { checkAdmin } = require('../middlewares/checkAdmin');
 
 router.get('/', getAllNews)
-router.post('/', newsFieldCheck, createNews)
-router.delete('/:id', deleteNewsById)
 router.get('/:id', getNewsById)
+router.post('/', validateToken, checkAdmin, newsFieldCheck, postNews)
+router.put('/:id', validateToken, checkAdmin, putNews)
+router.delete('/:id', validateToken, checkAdmin, deleteNewsById)
 
 module.exports = router;

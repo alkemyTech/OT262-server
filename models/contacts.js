@@ -18,10 +18,11 @@ module.exports = (sequelize, DataTypes) => {
     phone: DataTypes.INTEGER,
     email: DataTypes.STRING,
     message: DataTypes.STRING,
-    deletedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Contacts',
+    timestamps: true,
+    paranoid: true
   });
   return Contacts;
 };
