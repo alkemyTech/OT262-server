@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
+const { createToken } = require("../controllers/jwtAuth.controller");
 
 const registerUser = async (req, res) => {
   const errors = validationResult(req);
@@ -28,10 +29,21 @@ const registerUser = async (req, res) => {
         image,
         roleId: 1,
       });
+      const token = createToken(newUser);
 
       res
         .status(200)
-        .json({ msg: "User created successfully", payload: newUser });
+        .json({ 
+          msg: "User created successfully", 
+          data: {
+            firstName,
+            lastName,
+            email,
+            image,
+            roleId: newUser.roleId
+          },
+          token
+        });
     }
   } catch (err) {
     res.status(400).json({ msg: "Error creating user", err });
