@@ -26,10 +26,10 @@ const putSlides = async (req, res) => {
         })
     }
 
-    const { imageUrl, text, order, organizationId } = req.body;
+    const { image, text, order, organizationId } = req.body;
 
     try {
-        const updatedSlide = await updateSlide(foundSlide, { imageUrl, text, order, organizationId });
+        const updatedSlide = await updateSlide(foundSlide, { image, text, order, organizationId });
         res.status(200).json({
             msg: "Slide updated succesfully",
             updatedSlide
