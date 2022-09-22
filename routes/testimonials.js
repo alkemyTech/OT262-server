@@ -6,7 +6,7 @@ const { validateToken } = require('../middlewares/validateToken');
 const { checkAdmin } = require('../middlewares/checkAdmin');
 const { checkUser } = require('../middlewares/checkUser');
 
-router.get('/', validateToken, checkUser, getTestimonial);
+router.get('/', getTestimonial);
 router.get('/:id', validateToken, checkUser, getTestimonialById);
 router.post('/', validateToken, checkUser, testimonialFields, postTestimonial);
 router.put('/:id', validateToken, checkAdmin, putTestimonial);
