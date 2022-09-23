@@ -54,14 +54,22 @@ const deleteNewsById = async (req, res) => {
 
 const postNews = async (req, res) => {
     const errors = validationResult(req);
-
     if(!errors.isEmpty()) {
         return res.status(400).json({
             errors: errors
         })
     } 
-
+    
     const { name, content, image, type, categoryId } = req.body;
+    const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
+    
+    const fileType = image.split(":")[1].split(";")[0];
+    
+    if (!SUPPORTED_FORMATS.includes(fileType)){
+        return res.status(500).json({
+            error: `Only file extensions accepted are ${SUPPORTED_FORMATS}`
+        })
+    }
 
     try {
         const createdNew = await createNews({ name, content, image, type, categoryId })
@@ -106,6 +114,14 @@ const putNews = async (req, res) => {
     }
 
     const { name, content, image} = req.body;
+    const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
+
+    const fileType = image.split(":")[1].split(";")[0];
+    if (!SUPPORTED_FORMATS.includes(fileType)){
+        return res.status(500).json({
+            error: `Only file extensions accepted are ${SUPPORTED_FORMATS}`
+        })
+    }
 
     try {
         const toUpdateNews = await updateNews(foundNews, {name, content, image});
