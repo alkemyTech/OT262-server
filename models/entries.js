@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   entries.init({
     name: DataTypes.STRING,
-    image: DataTypes.STRING,
-    content: DataTypes.STRING,
+    image: DataTypes.TEXT('long'),
+    content: DataTypes.TEXT('long'),
     categoryId: DataTypes.STRING,
     type: DataTypes.STRING
   }, {

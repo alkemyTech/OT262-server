@@ -4,7 +4,7 @@ const getOrganization = async (req, res) => {
 	try {
 		const organization = await Organization.findOne();
 		const members = await Member.findAll({limit: 5});
-		const testimonials = await Testimonial.findAll({limit: 5});
+		const testimonials = await Testimonial.findAll({limit: 5, order: [ ['id', 'DESC']]});
 		return res.status(200).json({
 			status: "successful",
 			data: {
