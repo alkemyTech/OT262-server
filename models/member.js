@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Member.init({
     name: DataTypes.STRING,
-    image: DataTypes.STRING,
+    image: DataTypes.TEXT('long'),
     rol: DataTypes.STRING
   }, {
     sequelize,

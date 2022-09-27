@@ -17,8 +17,8 @@ const postMember = async (req, res) => {
     return res.status(400).json(errors)
   }
   try {
-    const { name, image } = req.body
-    const newMember = await Member.create({ name, image })
+    const { name, image, rol } = req.body
+    const newMember = await Member.create({ name, image, rol })
     res.status(201).json(newMember)
   } catch (error) {
     res.status(500).send(error)
@@ -56,7 +56,7 @@ const putMember = async (req, res) => {
     return res.status(400).json(errors)
   }
   const { id } = req.params
-  const { name, image } = req.body
+  const { name, image, rol } = req.body
   try {
     const member = await Member.findByPk(id)
     if (!member) {
@@ -64,7 +64,8 @@ const putMember = async (req, res) => {
     }
     const updatedMember = {
       name,
-      image
+      image,
+      rol
     }
     await Member.update(updatedMember, { where: { id } })
     return res.status(200).json(updatedMember)

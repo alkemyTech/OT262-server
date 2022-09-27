@@ -12,10 +12,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       image: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT('long')
       },
       content: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT('long')
       },
       deletedAt: {
         type: Sequelize.DATE

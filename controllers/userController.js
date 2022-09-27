@@ -1,6 +1,5 @@
 const { User } = require('../models');
 
-
 const getAllUsers = async (req, res) => {
 	try {
 		const users = await User.findAll();
@@ -27,4 +26,30 @@ const deleteUser = async (req, res) => {
     }
 }
 
-module.exports = { getAllUsers, deleteUser }
+const putUser = async (req, res) => {
+    const { firstName, lastName, email, image, roleId } = req.body;
+    const { id } = req.params;
+    const updatedUser = { firstName, lastName, email, image, roleId }
+    const user = await User.findOne({ where: { id }});
+    
+    if (!user){
+        return res.status(404).json({
+            error: `User with id ${id} not found`
+        })
+    }
+
+    try {
+        const updatedUserRes = await user.update(updatedUser)
+        res.status(200).json({
+            msg: "User updated succesfully",
+            activity: updatedUserRes
+        })
+    } catch (error) {
+        res.status(500).json({
+            msg: "Something went wrong",
+            errors: error.message
+        })
+    }
+}
+
+module.exports = { getAllUsers, deleteUser, putUser }

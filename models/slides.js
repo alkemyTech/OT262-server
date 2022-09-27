@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Slides.init({
-    image: DataTypes.STRING,
+    image: DataTypes.TEXT('long'),
     text: DataTypes.STRING,
     order: DataTypes.INTEGER,
     organizationId: DataTypes.INTEGER
